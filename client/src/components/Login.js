@@ -7,7 +7,7 @@ const initialValues = {
   password: ''
 }
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
@@ -23,6 +23,7 @@ const Login = () => {
       .then(res => {
         console.log(res)
         window.localStorage.setItem('token', res.data.payload)
+        props.history.push('/bubbles')
       })
       .catch(err => {
         console.log(err)
