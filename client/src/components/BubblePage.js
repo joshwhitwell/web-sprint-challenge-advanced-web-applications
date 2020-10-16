@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-import {fetchColors} from '../api/axiosWithAuth'
+import { fetchColors } from '../api/fetchColors'
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { axiosWithAuth, fetchColors } from "../api/axiosWithAuth";
+import { axiosWithAuth } from "../api/axiosWithAuth";
+import { fetchColors } from '../api/fetchColors'
 
 const initialColor = {
   color: "",

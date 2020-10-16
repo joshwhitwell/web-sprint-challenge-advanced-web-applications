@@ -1,11 +1,9 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
-import { fetchColors as mockFetchColors } from '../api/axiosWithAuth'
-import { axiosWithAuth as mockAxiosWithAuth } from '../api/axiosWithAuth'
-import { mockComponent } from "react-dom/test-utils";
+import { fetchColors } from '../api/fetchColors'
 
-jest.mock('../api/axiosWithAuth')
+jest.mock('../api/fetchColors')
 
 let colors = [
   {
@@ -88,11 +86,11 @@ let colors = [
 ];
 
 test("Fetches data and renders the bubbles", async () => {
-  const { rerender } = render(<BubblePage />)
-  mockFetchColors.mockResolvedValueOnce({
-    data: colors
-  })
-  // await waitFor(() => {})
-  // rerender(<BubblePage />)
-  // screen.debug()
+  fetchColors.mockResolvedValueOnce({ data: colors})
+  const { rerender } = render(<BubblePage/>)
+  await waitFor(() => {})
+  rerender(<BubblePage />)
+  let deleteButtons = screen.getAllByText('x')
+  expect(deleteButtons.length).toEqual(11)
+  
 });
