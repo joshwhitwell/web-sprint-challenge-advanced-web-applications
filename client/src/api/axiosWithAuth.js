@@ -9,4 +9,16 @@ export const axiosWithAuth = () => {
         },
         baseURL: 'http://localhost:5000/api'
     })
+    
+}
+
+export const fetchColors = () => {
+    return axiosWithAuth()
+      .get('/colors')
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+        return err
+      })
 }

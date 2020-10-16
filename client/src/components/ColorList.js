@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "../api/axiosWithAuth";
+import { axiosWithAuth, fetchColors } from "../api/axiosWithAuth";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, getColors }) => {
+const ColorList = ({ colors, setColorList }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -23,7 +23,13 @@ const ColorList = ({ colors, getColors }) => {
     axiosWithAuth()
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        getColors()
+        fetchColors()
+          .then(res => {
+            setColorList(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err)
@@ -35,7 +41,13 @@ const ColorList = ({ colors, getColors }) => {
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
       .then(res => {
-        getColors()
+        fetchColors()
+          .then(res => {
+            setColorList(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err)
